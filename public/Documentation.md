@@ -14,33 +14,7 @@ The database system covers:
 - Enrollment processing
 - Grade management
 
-## 2. Data Modelling and Database Design
-
-### 2.1 ER Diagram
-
-<img src="./er-diagram.png" />
-
-### 2.2 Relational Schema
-
-- User(id, first_name, middle_name, last_name, username, image, password, is_active, is_staff, is_superuser, last_login, date_joined)
-
-- Author(id, first_name, middle_name, last_name, bio)
-
-- Publisher(id, name, city, country)
-
-- Category(id, name)
-
-- Book(id, publisher_id, isbn, title, publication_date, location, total_copies, available_copies, date_created, last_updated)
-
-- BookAuther(id, book_id, author_id)
-
-- Copy(id, book_id, book_number, status, acquisition_date, condition)
-
-- Loan(id, user_id, copy_id, checkout_date, due_date, checkin_date)
-
-- Fine(id, user_id, loan_id, amount, status, date_created, last_updated)
-
-- Payment(id, user_id, fine_id, amount date_created)
+## 2. Database Design
 
 ### 2.1 Entity-Relationship Model
 
@@ -155,7 +129,7 @@ CREATE TABLE Students (
 1. Table Creation Tests
 ```sql
 -- Test Department Table
-INSERT INTO Departments (DepartmentName, Location)
+INSERT INTO Departments (DepartmentName, Location) 
 VALUES ('Computer Science', 'Building A');
 SELECT * FROM Departments WHERE DepartmentName = 'Computer Science';
 ```
@@ -175,8 +149,8 @@ INSERT INTO Students (Email) VALUES ('duplicate@email.com');
 BEGIN TRANSACTION;
     INSERT INTO Enrollments (StudentID, CourseID, SemesterID)
     VALUES (@StudentID, @CourseID, @SemesterID);
-
-    UPDATE Courses
+    
+    UPDATE Courses 
     SET CurrentEnrollment = CurrentEnrollment + 1
     WHERE CourseID = @CourseID;
 COMMIT;
